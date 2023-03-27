@@ -2,7 +2,7 @@ import { ACCESS_TOKEN } from 'constants/index';
 import axios, { AxiosResponse } from "axios";
 
 export const axiosClient = axios.create({
-    baseURL: process.env.VITE_API_URL,
+    baseURL: 'https://api.smartlogbfms.com',
     headers: {
         'Content-Type': 'application/json; charset=utf-8'
     }

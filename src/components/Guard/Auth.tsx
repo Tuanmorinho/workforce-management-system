@@ -1,17 +1,14 @@
 import { ACCESS_TOKEN } from "constants/index";
-import { selectCurrentUser, selectIsLoggedIn } from "features/auth/authSlice";
+import { authAction, selectCurrentUser, selectIsLoggedIn } from "features/auth/authSlice";
 import jwtDecode from "jwt-decode";
 import { IAuthUser } from "models";
-import { ReactNode, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "redux/hooks";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 
-interface IAuthProps {
-    children: ReactNode
-}
-
-export default function Auth({ children }: IAuthProps) {
+export default function Auth() {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const isLoggedIn: boolean = useAppSelector(selectIsLoggedIn);
     const currentUser: Partial<IAuthUser> | undefined = useAppSelector(selectCurrentUser);
@@ -19,12 +16,15 @@ export default function Auth({ children }: IAuthProps) {
     const token: string | null = localStorage.getItem(ACCESS_TOKEN);
 
     useEffect(() => {
+        if ((!isLoggedIn || !currentUser) && token) {
+            dispatch(authAction.logout());
+        };
         if (!isLoggedIn || !currentUser || !token || !jwtDecode(token)) navigate('/login');
-    }, [isLoggedIn, currentUser, token])
+    }, [isLoggedIn, currentUser, token, navigate])
 
     return (
         <>
-            { children }
+            <Outlet />
         </>
     )
 }

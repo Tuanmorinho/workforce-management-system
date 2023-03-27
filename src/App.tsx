@@ -8,16 +8,24 @@ import { HistoryRouter } from "redux-first-history/rr6";
 import AppLayout from 'layouts/AppLayout';
 import LoginPage from 'pages/Auth/Login';
 import LandingPage from 'pages/Landing';
+import Auth from 'components/Guard/Auth';
+import RegisterPage from 'pages/Auth/Register';
 
 export function App() {
   return (
     <Routes>
         <Route path='/' element={<AppLayout />}>
+
           <Route index element={<LandingPage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
 
-          <Route path="" element={<Navigate to="/" />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path='/' element={<Auth />}>
+            <Route index element={<div>Hello </div>} />
+
+            <Route path="" element={<Navigate to="/" />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<Navigate to='/' />} />

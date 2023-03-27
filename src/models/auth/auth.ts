@@ -22,3 +22,15 @@ export interface IAuthUser {
         }
     }
 }
+
+export interface IRegisterPayload {
+    username: string;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    passportNo: string;
+    nationality: string;
+    password: string;
+    confirmPassword: string;
+    phoneNumber?: string;
+}

@@ -15,14 +15,13 @@ function* handleLogin(payload: ILoginPayload) {
         const decoded: Partial<IAuthUser> = jwtDecode(resposne.access_token);
 
         yield put(authAction.loginSuccess(decoded));
-        yield put(push('/crm/home'));
+        yield put(push('/'));
     } catch (error) {
         console.log(error)
     }
 }
 
 function* handleLogout() {
-    yield delay(500);
     localStorage.removeItem(ACCESS_TOKEN);
     yield put(push('/login'));
 }

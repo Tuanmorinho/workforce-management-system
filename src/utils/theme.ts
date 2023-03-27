@@ -14,18 +14,9 @@ export const theme = createTheme({
       main: '#052225',
       light: '#667071'
     },
-    // error: {
-    //   main: red.A400,
-    //   light: '#E98074'
-    // },
   },
   typography: {
     fontFamily: `"Manrope", "Helvetica", "Arial", sans-serif`,
-    // body1: {
-    //     color: '#052225',
-    //     fontWeight: 700,
-    //     fontSize: '30px'
-    // }
   },
   components: {
     MuiContainer: {
@@ -77,12 +68,34 @@ export const theme = createTheme({
         }
       }
     },
-    MuiInputBase: {
+    MuiFormControl: {
       styleOverrides: {
         root: {
-          borderRadius: '4px'
+          marginTop: '12px'
         }
       }
-    }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: '4px',
+          borderColor: 'rgba(6, 25, 28, 0.1) !important',
+          background: 'rgba(49, 85, 89, 0.04)',
+          fontSize: '15px',
+
+          '& fieldset': {
+            borderColor: 'rgba(6, 25, 28, 0.1);',
+          },
+          '&:hover fieldset': {
+            borderColor: 'rgba(13,110,253,.25) !important',
+            boxShadow: '0 0 0 0.25rem rgba(13,110,253,.25)'
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: 'rgba(13,110,253,.25) !important',
+            boxShadow: '0 0 0 0.25rem rgba(13,110,253,.25)'
+          },
+        },
+      }
+    },
   }
 });

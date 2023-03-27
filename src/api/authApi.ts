@@ -5,13 +5,13 @@ import { axiosClient } from "./axiosClient";
 const authApi = {
     signIn(credentials: ILoginPayload): Promise<ILoginResponse> {
 
-        const url = `/auth/realms/${process.env.VITE_KEYCLOAK_REALM}/protocol/openid-connect/token`
+        const url = `/auth/realms/bfms/protocol/openid-connect/token`
 
         return axiosClient.post(url,
             queryString.stringify({
                 ...credentials,
                 grant_type: 'password',
-                client_id: process.env.VITE_KEYCLOAK_CLIENT_ID
+                client_id: 'frontend'
             }),
             {
                 headers: { 
