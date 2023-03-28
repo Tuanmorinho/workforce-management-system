@@ -53,7 +53,7 @@ export default function LoginForm(props: ILoginFormProps) {
 
                 <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} width={'100%'}>
                     <FormControlLabel control={<Checkbox />} label="Remember Me" sx={{ fontSize: '15px', lineHeight: '20px', fontWeight: '400', mt:'2px' }} />
-                    <Link component={RouterLink} to={'/register'} color={'#1C969E'}>
+                    <Link component={RouterLink} to={'/auth/register'} color={'#1C969E'}>
                         Register
                     </Link>
                 </Stack>
@@ -63,10 +63,10 @@ export default function LoginForm(props: ILoginFormProps) {
                         <Button variant="contained" type={'submit'} disabled={isSubmitting || !isValid} startIcon={ isSubmitting ? <CircularProgress size={16} /> : <PersonIcon />} sx={{ fontSize: '16px', width: '112px', height: '45px', backgroundColor: 'primary.main', borderRadius: '6px' }}>Sign In</Button>
                         <Box sx={{ fontSize: '15px' }}>
                             Forgot&ensp;&ensp;
-                            <Link component={RouterLink} to={'/login'} color={'#ABB0B0'}>
+                            <Link component={RouterLink} to={'/auth/login'} color={'#ABB0B0'}>
                                 Username
                             </Link>&ensp;&ensp;|&ensp;&ensp;
-                            <Link component={RouterLink} to={'/login'} color={'#ABB0B0'}>
+                            <Link component={RouterLink} to={'/auth/login'} color={'#ABB0B0'}>
                                 Password
                             </Link>
                         </Box>

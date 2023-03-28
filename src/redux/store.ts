@@ -5,8 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
 
 import authReducer from 'features/auth/authSlice';
-// import layoutBreakpointSlice from 'features/layoutBreakpoint/layoutBreakpointSlice';
-// import listCustomerReducer from 'features/customer/listCustomerSlice';
+import readPassportReducer from 'features/readPassport/readPassportSlice';
 
 const {
   createReduxHistory,
@@ -20,10 +19,9 @@ export const store = configureStore({
   reducer: {
     router: routerReducer,
     auth: authReducer,
-    // layoutBreakPoint: layoutBreakpointSlice,
-    // listCutomer: listCustomerReducer
+    readPDF: readPassportReducer
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware, routerMiddleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}).concat(sagaMiddleware, routerMiddleware)
 });
 
 sagaMiddleware.run(rootSaga);

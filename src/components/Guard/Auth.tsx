@@ -19,7 +19,7 @@ export default function Auth() {
         if ((!isLoggedIn || !currentUser) && token) {
             dispatch(authAction.logout());
         };
-        if (!isLoggedIn || !currentUser || !token || !jwtDecode(token)) navigate('/login');
+        if (!isLoggedIn || !currentUser || !token || !jwtDecode(token)) navigate('/');
     }, [isLoggedIn, currentUser, token, navigate])
 
     return (

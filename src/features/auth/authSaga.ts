@@ -4,7 +4,7 @@ import { IAuthUser, ILoginPayload, ILoginResponse } from 'models/auth/auth';
 import { PayloadAction } from '@reduxjs/toolkit';
 import jwtDecode from 'jwt-decode';
 import { push } from 'redux-first-history';
-import { call, delay, fork, put, take } from "redux-saga/effects";
+import { call, fork, put, take } from "redux-saga/effects";
 import { authAction } from "./authSlice";
 
 function* handleLogin(payload: ILoginPayload) {
@@ -15,15 +15,15 @@ function* handleLogin(payload: ILoginPayload) {
         const decoded: Partial<IAuthUser> = jwtDecode(resposne.access_token);
 
         yield put(authAction.loginSuccess(decoded));
-        yield put(push('/'));
+        yield put(push('/wms'));
     } catch (error) {
-        console.log(error)
+        yield put(authAction.loginFailed)
     }
 }
 
 function* handleLogout() {
     localStorage.removeItem(ACCESS_TOKEN);
-    yield put(push('/login'));
+    yield put(push('/'));
 }
 
 function* watchAuthFlow() {

@@ -19,9 +19,9 @@ export default function LandingPage() {
                             <Typography color={'#0D383D'} fontSize={'55px'} lineHeight={'65px'} align={'left'} fontWeight={'Bold'} width={'435px'}>Workforce Management System</Typography>
                             <Box mt={'33px'}>
                                 <Stack direction={'row'} justifyContent='flex-start' alignItems={'center'}>
-                                    <Button variant="contained" startIcon={<PersonIcon />} sx={{ fontSize: '16px', width: '112px', height: '45px', backgroundColor: 'primary.main', borderRadius: '6px' }} onClick={() => navigate('/login')}>Sign In</Button>
+                                    <Button variant="contained" startIcon={<PersonIcon />} sx={{ fontSize: '16px', width: '112px', height: '45px', backgroundColor: 'primary.main', borderRadius: '6px' }} onClick={() => navigate('/auth/login')}>Sign In</Button>
                                     <Typography color={'#1C969E'} fontSize={'20px'} fontWeight={500} lineHeight={'25px'} mx={'25px'}>|</Typography>
-                                    <Link component={RouterLink} to={'/'} pr={'25px'} color={'#5E6969'} fontSize={'18px'} fontWeight={500} lineHeight={'27.6px'}>
+                                    <Link component={RouterLink} to={'/auth/register'} pr={'25px'} color={'#5E6969'} fontSize={'18px'} fontWeight={500} lineHeight={'27.6px'}>
                                         Register Now!
                                     </Link>
                                 </Stack>

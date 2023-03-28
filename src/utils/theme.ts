@@ -97,5 +97,16 @@ export const theme = createTheme({
         },
       }
     },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'white',
+          
+          '& > .MuiLinearProgress-bar': {
+            backgroundColor: '#7DD9DF !important'
+          }
+        }
+      }
+    }
   }
 });

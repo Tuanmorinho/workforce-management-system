@@ -1,7 +1,7 @@
 import { Header, Footer } from "components/Common";
 import { Box, Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import NoAuth from 'components/Guard/noAuth';
+import { ToastContainer } from 'react-toastify';
 
 export default function AppLayout() {
     return (
@@ -9,11 +9,22 @@ export default function AppLayout() {
 			<Stack minHeight='100vh'>
 				<Header />
 				<Box mt={'95px'} flexGrow={1} position={'relative'}>
-					
 					<Outlet />
 				</Box>
 				<Footer />
 			</Stack>
+			<ToastContainer
+				position="top-center"
+				autoClose={2000}
+				hideProgressBar
+				newestOnTop
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="colored"
+			/>
 		</Box>
     )
 }

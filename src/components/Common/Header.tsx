@@ -36,7 +36,7 @@ export function Header() {
                         </IconButton>
                     </Box>
                     <Box>
-                        <Button variant="contained" startIcon={<PersonIcon />} sx={{ fontSize: '16px', width: '112px', height: '45px', backgroundColor: 'primary.main', borderRadius: '6px' }} onClick={() => navigate('/login')}>Sign In</Button>
+                        <Button variant="contained" startIcon={<PersonIcon />} sx={{ fontSize: '16px', width: '112px', height: '45px', backgroundColor: 'primary.main', borderRadius: '6px' }} onClick={() => navigate('/auth/login')}>Sign In</Button>
                     </Box>
                 </Stack>
             </Box>
