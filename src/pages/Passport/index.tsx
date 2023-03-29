@@ -1,19 +1,20 @@
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import { DragDropFile } from "components/Upload";
-import { readPassportAction, selectIsReadingSuccess } from "features/readPassport/readPassportSlice";
+import { readPassportAction, selectIsReading, selectIsReadingSuccess, selectReadResult } from "features/readPassport/readPassportSlice";
 import { useState } from "react";
-import { useAppDispatch } from "redux/hooks";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import UploadingFile from "./components/UploadingFile";
-import { selectIsReading } from "features/readPassport/readPassportSlice";
-import { useAppSelector } from "redux/hooks";
 
 export default function UploadPassport() {
 
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const readingFile: boolean = useAppSelector(selectIsReading);
     const readSuccess: boolean = useAppSelector(selectIsReadingSuccess);
+    const result: any = useAppSelector(selectReadResult);
 
-    const [file, setFile] = useState<File>();
+    const [file, setFile] = useState<File | null>(null);
 
     const handleGetFileUpload = (file: File) => {
         setFile(file);
@@ -23,6 +24,10 @@ export default function UploadPassport() {
         file && dispatch(readPassportAction.readPDF(file));
     }
 
+    const handleNextToUploadPSV = () => {
+        setFile(null);
+        navigate('/wms/psv');
+    }
 
     return (
         <Box width={'100%'} height={'100%'}>
@@ -37,10 +42,10 @@ export default function UploadPassport() {
                             }
                         </Box>
                         {
-                            file && readSuccess && <Button variant="contained" disabled={readingFile} sx={{ fontSize: '16px', width: '135px', height: '45px', backgroundColor: 'primary.main', borderRadius: '6px', mt: '20px' }}>Continue</Button>
+                            readSuccess && result && <Button variant="contained" disabled={!result} sx={{ fontSize: '16px', width: '135px', height: '45px', backgroundColor: 'primary.main', borderRadius: '6px', mt: '20px' }} onClick={handleNextToUploadPSV}>Continue</Button>
                         }
                         {
-                            !readingFile && <Button variant="contained" disabled={!Boolean(file)} sx={{ fontSize: '16px', width: '135px', height: '45px', backgroundColor: 'primary.main', borderRadius: '6px', mt: '20px' }} onClick={handleUploadFile}>Upload File</Button>
+                            !readSuccess && <Button variant="contained" disabled={readingFile} sx={{ fontSize: '16px', width: '135px', height: '45px', backgroundColor: 'primary.main', borderRadius: '6px', mt: '20px' }} onClick={handleUploadFile}>Upload File</Button>
                         }
                     </Stack>
                 </Paper>

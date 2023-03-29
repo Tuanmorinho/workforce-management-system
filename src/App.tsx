@@ -12,8 +12,9 @@ import AppLayout from 'layouts/AppLayout';
 import LoginPage from 'pages/Auth/Login';
 import RegisterPage from 'pages/Auth/Register';
 import LandingPage from 'pages/Landing';
-import MainPage from 'pages/Main';
+import UploadPassport from 'pages/Passport';
 import ThankYouPage from 'pages/Success';
+import UploadPSV from 'pages/PSV';
 
 export function App() {
   return (
@@ -29,10 +30,11 @@ export function App() {
           </Route>
 
           <Route path='wms' element={<Auth />}>
-            <Route index element={<MainPage />} />
+            <Route path='passport' element={<UploadPassport />} />
+            <Route path='psv' element={<UploadPSV />} />
 
-            <Route path="" element={<Navigate to="wms" />} />
-            <Route path="*" element={<Navigate to="wms" />} />
+            <Route path="" element={<Navigate to="passport" />} />
+            <Route path="*" element={<Navigate to="passport" />} />
           </Route>
         </Route>
 

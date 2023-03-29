@@ -5,6 +5,7 @@ import { IAuthUser } from "models";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { AuthUtils } from "utils/auth";
 
 export default function Auth() {
     const navigate = useNavigate();
@@ -16,11 +17,20 @@ export default function Auth() {
     const token: string | null = localStorage.getItem(ACCESS_TOKEN);
 
     useEffect(() => {
-        if ((!isLoggedIn || !currentUser) && token) {
+        check();
+    }, [isLoggedIn, currentUser, token, navigate]);
+
+    const check = () => {
+        if (!token || !jwtDecode(token)) navigate('/');
+        
+        if ((!isLoggedIn || !currentUser) && token && AuthUtils.isTokenExpired(token)) {
             dispatch(authAction.logout());
         };
-        if (!isLoggedIn || !currentUser || !token || !jwtDecode(token)) navigate('/');
-    }, [isLoggedIn, currentUser, token, navigate])
+
+        if ((!isLoggedIn || !currentUser) && token && !AuthUtils.isTokenExpired(token)) {
+            dispatch(authAction.reUpdate(jwtDecode(token)));
+        };
+    }
 
     return (
         <>

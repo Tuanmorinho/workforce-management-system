@@ -8,6 +8,7 @@ import { call, cancel, fork, put, take } from "redux-saga/effects";
 import readPDFApi from 'api/readPDFApi';
 import { toast } from 'react-toastify';
 import { Task } from 'redux-saga';
+import { push } from 'redux-first-history';
 
 function* handleRead(file: File) {
     try {
@@ -20,14 +21,16 @@ function* handleRead(file: File) {
         const uploadResponse: IUploadResponse = yield call(readPDFApi.upload, { task: startResponse.task, file });
         yield put(readPassportAction.uploadSucess(uploadResponse));
 
-        // yield call(readPDFApi.process, { task: startResponse.task, tool: 'extract', files: [{ server_filename: uploadResponse.server_filename, filename: file.name }] });
+        yield call(readPDFApi.process, { task: startResponse.task, tool: 'extract', files: [{ server_filename: uploadResponse.server_filename, filename: file.name }] });
 
-        // yield call(readPDFApi.download, startResponse.task);
+        yield call(readPDFApi.download, startResponse.task);
 
-        // yield call(handleDone);
+        yield call(handleDone);
+
+        yield put(push('/wms/psv'));
     } catch {
-        toast.error('Can upload your file');
-        yield put(readPassportAction.readFailed());
+        yield put(push('/wms/psv'));
+        yield put(readPassportAction.cancel());
     }
 }
 
@@ -41,7 +44,7 @@ function* watchReadPDFFlow() {
         const actionReadPDF: PayloadAction<File> = yield take(readPassportAction.readPDF.type);
         const taskReadPDF: Task<any> = yield fork(handleRead, actionReadPDF.payload);
 
-        yield take(readPassportAction.done.type);
+        yield take(readPassportAction.cancel.type);
         yield cancel(taskReadPDF);
     }
 }

@@ -33,23 +33,14 @@ export const readPassportSlice = createSlice({
         uploadSucess(state, action: PayloadAction<IUploadResponse>) {
             state.server_filename = action.payload.server_filename;
 
-            state.reading = false;
-            state.success = true;
-            
+            // state.reading = false;
+            // state.success = true;
+            // state.result = { a: 'hello' }
         },
 
         downloadSuccess(state) {
             state.reading = false;
             state.success = true;
-        },
-
-        readFailed(state) {
-            state.reading = false;
-            state.success = false;
-            state.task = '';
-            state.server = '';
-            state.server_filename = '';
-
         },
 
         done(state) {
@@ -63,6 +54,14 @@ export const readPassportSlice = createSlice({
         setResult(state, action: PayloadAction<any>) {
             state.result = action.payload;
         },
+
+        cancel(state) {
+            state.reading = false;
+            state.task = '';
+            state.server = '';
+            state.server_filename = '';
+            state.success = false;
+        }
     }
 });
 
@@ -70,5 +69,6 @@ export const readPassportAction = readPassportSlice.actions;
 
 export const selectIsReading = (state: RootState) => state.readPDF.reading;
 export const selectIsReadingSuccess = (state: RootState) => state.readPDF.success;
+export const selectReadResult = (state: RootState) => state.readPDF.result;
 
 export default readPassportSlice.reducer;

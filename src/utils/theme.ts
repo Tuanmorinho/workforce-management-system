@@ -107,6 +107,43 @@ export const theme = createTheme({
           }
         }
       }
+    },
+    MuiStep: {
+      styleOverrides: {
+        root: {
+          padding: 0
+        }
+      }
+    },
+    MuiStepLabel: {
+      styleOverrides: {
+        root: {
+          '& > .MuiStepLabel-labelContainer > .MuiStepLabel-label' : {
+            color: '#06191C', 
+            fontSize: '16px', 
+            fontWeight: '400', 
+            lineHeight: '22px',
+            marginLeft: '15px',
+            marginRight: '15px'
+          },
+
+          '& > .MuiStepLabel-iconContainer > svg': {
+            padding: 0,
+
+            '& > svg': {
+              width: '45px',
+              height: '45px',
+            }
+
+            // '& > svg > text': {
+            //   color: 'white', 
+            //   fontSize: '20px', 
+            //   fontWeight: '600', 
+            //   lineHeight: '27px',
+            // }
+          }
+        }
+      }
     }
   }
 });

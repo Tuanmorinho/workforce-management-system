@@ -34,6 +34,12 @@ export const authSlice = createSlice({
             state.logging = false;
         },
 
+        reUpdate(state, action: PayloadAction<Partial<IAuthUser>>) {
+            state.isLoggedIn = true;
+            state.logging = false;
+            state.currentUser = action.payload;
+        },
+
         logout(state) {
             state.isLoggedIn = false;
             state.currentUser = undefined;
